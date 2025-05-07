@@ -15,10 +15,12 @@ public class CarController : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        //ToDo: add checks if wheels are present
         foreach (var wheel in wheels) {
             wheel.collider.motorTorque = moveInput.y * powerMultiplier;
         }
         float steer = moveInput.x * maxSteer;
+        //ToDo: add math lerp or some sort of interpolation
         if (moveInput.x > 0) {
             wheels[0].collider.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (trackwidth / 2 + Mathf.Tan(Mathf.Deg2Rad * steer) * wheelbase));
             wheels[1].collider.steerAngle = steer;
@@ -28,9 +30,21 @@ public class CarController : MonoBehaviour {
         } else {
             wheels[0].collider.steerAngle = wheels[1].collider.steerAngle = 0;
         }
-
         for (int i = 0; i < wheels.Length; i++) {
-            wheels[i].collider.transform.localRotation = Quaternion.Euler(0, wheels[i].collider.steerAngle, 0);
+            Quaternion Rot;
+            Vector3 Pos;
+            wheels[i].collider.GetWorldPose(out Pos, out Rot);
+
+            Transform[] ChildTranforms = new Transform[wheels[i].collider.transform.childCount];
+            int index = 0;
+            foreach (var item in ChildTranforms) {
+                wheels[i].collider.transform.GetChild(index).position = Pos;
+                wheels[i].collider.transform.GetChild(index).rotation = Rot;
+                index++;
+            }
+
+            //ToDo: this can be used to rotate the brake calipers
+            //wheels[i].collider.transform.localRotation = Quaternion.Euler(0 , wheels[i].collider.transform.rotation.eulerAngles.y, 0);
         }
     }
 

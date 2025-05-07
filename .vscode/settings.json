@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "good game.sln"
+    "dotnet.defaultSolution": "car game.sln"
 }
