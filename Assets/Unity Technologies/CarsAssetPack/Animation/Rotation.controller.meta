@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0747f3b1f259dd346a1369cc99f15e3a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 259182
+  packageName: Low Poly Car Vehicle Pack
+  packageVersion: 1.0
+  assetPath: Assets/Unity Technologies/CarsAssetPack/Animation/Rotation.controller
+  uploadId: 596328
